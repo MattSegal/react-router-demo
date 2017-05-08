@@ -4,28 +4,30 @@ const pipe = (...fns) => fns.reduce(_pipe)
 
 
 const types = {
-    NOTHING: 'NOTHING',
+    TOGGLE_VISIBLE: 'TOGGLE_VISIBLE',
 }
 
 
 const actions = {
-
+    toggleVisibility: () => ({
+        type: types.TOGGLE_VISIBLE,
+    })
 }
 
 
-const nothingReducer = (action) => (state) =>
+const visibilityReducer = (action) => (state) =>
 {
   switch(action.type)
   {
-    case types.NOTHING:     return {...state}
-    default:                return {...state}
+    case types.TOGGLE_VISIBLE:      return {...state}
+    default:                        return {...state}
   }
 }
 
 
 const reducer = (state,action) =>
     pipe(
-        nothingReducer(action),
+        visibilityReducer(action),
     )(state)
 
 

@@ -7,24 +7,31 @@
 
 # Purpose
 
-  * expose internals of React Router after I had some issues [at home](http://www.mattslinks.xyz/)
-  * 
+* demo to get you started
+* expose internals of React Router after I had some issues [at home](http://www.mattslinks.xyz/)
+ 
 
 # Overview
 
-    - Routing library for React that makes it easier to build a SPA
-    - Made by 'React Training' - not Facebook 
-    - We're using v4 - subtle and annoying differences from v3 - so check the date of your SO questions
-    - Really nice demos at [React Training](https://reacttraining.com/react-router/web/example/basic)
+* Routing library for React that makes it easier to build a SPA
+* Can use browser API to keep track of history
+* Made by 'React Training' - not Facebook 
+* We're using v4 - subtle and annoying differences from v3 - so check the date of your SO questions
+* Really nice demos at [React Training](https://reacttraining.com/react-router/web/example/basic)
 
-# Components
+# Three Basic Components
 
-    - 
+* Link
+    * nav.js
+* Route
+    * content.js
+    * routes.js
+    * content-alt.js
+* Router
+    * index.js
 
-# Styles
+# Collision with Redux
 
-# Under the hood
-
-# Hash and browser router
-
-# Collision with redux
+* Both systems use React's context feature
+* Redux's connect function 'blocks' context updates
+* redux.js
