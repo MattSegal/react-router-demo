@@ -19,7 +19,7 @@ const visibilityReducer = (action) => (state) =>
 {
   switch(action.type)
   {
-    case types.TOGGLE_VISIBLE:      return {...state}
+    case types.TOGGLE_VISIBLE:      return {...state, visible: !state.visible}
     default:                        return {...state}
   }
 }

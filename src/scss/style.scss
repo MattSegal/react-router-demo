@@ -12,7 +12,20 @@ a {
     text-decoration: none;
 }
 
+img {
+    display: block;
+    height: 200px;
+}
+
 #react-root {
     max-width: 800px;
     margin: 0 auto;
+}
+
+#redux-container {
+    display: flex;
+}
+
+.redux-example {
+    width: 50%;
 }

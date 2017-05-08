@@ -25778,7 +25778,7 @@
 	    return function (state) {
 	        switch (action.type) {
 	            case types.TOGGLE_VISIBLE:
-	                return _extends({}, state);
+	                return _extends({}, state, { visible: !state.visible });
 	            default:
 	                return _extends({}, state);
 	        }
@@ -28934,6 +28934,16 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
+	var _propTypes = __webpack_require__(40);
+
+	var _propTypes2 = _interopRequireDefault(_propTypes);
+
+	var _reactRouterDom = __webpack_require__(38);
+
+	var _reactRedux = __webpack_require__(250);
+
+	var _reducers = __webpack_require__(228);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -28942,8 +28952,107 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	var ReduxPage = function (_Component) {
-	  _inherits(ReduxPage, _Component);
+	var Container = function (_Component) {
+	  _inherits(Container, _Component);
+
+	  function Container() {
+	    _classCallCheck(this, Container);
+
+	    return _possibleConstructorReturn(this, (Container.__proto__ || Object.getPrototypeOf(Container)).apply(this, arguments));
+	  }
+
+	  _createClass(Container, [{
+	    key: 'componentWillUpdate',
+	    value: function componentWillUpdate(nextProps, nextState) {
+	      console.log(this.props.name + ' - Im updating!');
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      var _props = this.props,
+	          visible = _props.visible,
+	          toggleVisibility = _props.toggleVisibility;
+
+	      return _react2.default.createElement(
+	        'div',
+	        null,
+	        _react2.default.createElement(
+	          'h2',
+	          null,
+	          'Play peek a boo!'
+	        ),
+	        _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/redux/', component: function component() {
+	            return _react2.default.createElement(
+	              'div',
+	              null,
+	              _react2.default.createElement(
+	                _reactRouterDom.Link,
+	                { to: '/redux/visible' },
+	                'Peek'
+	              ),
+	              _react2.default.createElement('img', { src: 'http://www.clipartkid.com/images/634/baby-goofy-peek-a-boo-WdVY5e-clipart.png' })
+	            );
+	          } }),
+	        _react2.default.createElement(_reactRouterDom.Route, { path: '/redux/visible', component: function component() {
+	            return _react2.default.createElement(
+	              'div',
+	              null,
+	              _react2.default.createElement(
+	                _reactRouterDom.Link,
+	                { to: '/redux/' },
+	                'Hide!'
+	              ),
+	              _react2.default.createElement('img', { src: 'https://dncache-mauganscorp.netdna-ssl.com/thumbseg/518/518148-bigthumbnail.jpg' })
+	            );
+	          } })
+	      );
+	    }
+	  }]);
+
+	  return Container;
+	}(_react.Component);
+
+	var mapStateToProps = function mapStateToProps(state) {
+	  return {
+	    visible: state.visible
+	  };
+	};
+
+	var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+	  return {
+	    toggleVisibility: function toggleVisibility() {
+	      return dispatch(_reducers.actions.toggleVisibility());
+	    }
+	  };
+	};
+
+	var ConnectedContainer = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(Container);
+
+	var FixedContainer = function (_Component2) {
+	  _inherits(FixedContainer, _Component2);
+
+	  function FixedContainer() {
+	    _classCallCheck(this, FixedContainer);
+
+	    return _possibleConstructorReturn(this, (FixedContainer.__proto__ || Object.getPrototypeOf(FixedContainer)).apply(this, arguments));
+	  }
+
+	  _createClass(FixedContainer, [{
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(ConnectedContainer, { router: this.context.router, name: 'Fixed' });
+	    }
+	  }]);
+
+	  return FixedContainer;
+	}(_react.Component);
+
+	FixedContainer.contextTypes = {
+	  router: _propTypes2.default.object
+	};
+
+	var ReduxPage = function (_Component3) {
+	  _inherits(ReduxPage, _Component3);
 
 	  function ReduxPage() {
 	    _classCallCheck(this, ReduxPage);
@@ -28961,6 +29070,30 @@
 	          'h2',
 	          null,
 	          'Redux'
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { id: 'redux-container' },
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'redux-example' },
+	            _react2.default.createElement(
+	              'h3',
+	              null,
+	              'Working'
+	            ),
+	            _react2.default.createElement(FixedContainer, null)
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'redux-example' },
+	            _react2.default.createElement(
+	              'h3',
+	              null,
+	              'Broken'
+	            ),
+	            _react2.default.createElement(ConnectedContainer, { name: 'Broken' })
+	          )
 	        )
 	      );
 	    }
